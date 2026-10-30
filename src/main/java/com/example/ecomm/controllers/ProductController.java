@@ -2,6 +2,7 @@ package com.example.ecomm.controllers;
 
 
 import com.example.ecomm.dtos.ProductDto;
+import com.example.ecomm.dtos.ProductPatchDto;
 import com.example.ecomm.dtos.ProductPitchDto;
 import com.example.ecomm.mappers.ProductMapper;
 import com.example.ecomm.models.Product;
@@ -66,6 +67,20 @@ public class ProductController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(productMapper.toDto(replaced), HttpStatus.OK);
+    }
+
+    @PatchMapping("/products/{id}")
+    public ResponseEntity<ProductDto> patchProduct(@PathVariable("id") Long id,
+                                                   @RequestBody ProductPatchDto productPatchDto) {
+        if (productPatchDto == null) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+
+        Product patched = productService.patchProduct(productPatchDto, id);
+        if (patched == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(productMapper.toDto(patched), HttpStatus.OK);
     }
 
     @DeleteMapping("/products/{id}")

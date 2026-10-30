@@ -2,6 +2,7 @@ package com.example.ecomm.services;
 
 import com.example.ecomm.dtos.DummyJsonProductDto;
 import com.example.ecomm.dtos.DummyJsonProductListDto;
+import com.example.ecomm.dtos.ProductPatchDto;
 import com.example.ecomm.models.Category;
 import com.example.ecomm.models.Product;
 import org.springframework.boot.restclient.RestTemplateBuilder;
@@ -68,6 +69,11 @@ public class DummyJsonProductService implements IProductService{
     @Override
     public Product replaceProduct(Product product, Long id) {
         throw new IllegalStateException("Replacement denied");
+    }
+
+    @Override
+    public Product patchProduct(ProductPatchDto patch, Long id) {
+        throw new IllegalStateException("Patching denied");
     }
 
     @Override
